@@ -16,5 +16,11 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Objava objava = new Objava(0, 0);
+            objava.Show();
+        }
     }
 }
