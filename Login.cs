@@ -42,9 +42,11 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                         {
                             Console.WriteLine("Da");
                             MessageBox.Show("Login uspesan!");
+                            Sesija.idString = tabela.Rows[0]["id"].ToString();
+                            Sesija.id = Convert.ToInt32(Sesija.idString);
                             this.Hide();
-                            //Glavna glavna = new Glavna();
-                            //glavna.Show();
+                            Glavna glavna = new Glavna();
+                            glavna.Show();
                         }
                         else
                         {
