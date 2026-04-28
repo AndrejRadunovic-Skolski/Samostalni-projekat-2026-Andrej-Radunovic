@@ -33,6 +33,39 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             objava.Show();
         }
 
+        void ucitajObjave(int Kategorija)
+        {
+            SqlConnection veza = Konekcija.NapraviVezu();
+            string query = @"SELECT 
+                            o.objava_id,
+                            o.naslov, 
+                            o.sadrzaj, 
+                            k.ime AS Autor,
+                            ISNULL(SUM(g.vrednost), 0) AS UkupnoGlasova
+                            FROM Objava o
+                            INNER JOIN Korisnik k ON o.korisnik_id = k.korisnik_id
+                            LEFT JOIN Glas g ON o.objava_id = g.objava_id
+                            GROUP BY o.objava_id, o.naslov, o.sadrzaj, k.ime, o.datum_objave
+                            ORDER BY o.datum_objave DESC;";   
+            SqlCommand cmd = new SqlCommand(query, veza);
+            veza.Open();
+            SqlDataReader reader = cmd.ExecuteReader();
+
+            while (reader.Read())
+            {
+                PostControl post = new PostControl();
+
+                post.PromeniPodatke(
+                    reader["naslov"].ToString(),
+                    reader["Autor"].ToString(),
+                    reader["UkupnoGlasova"].ToString()
+                );
+
+                flowLayoutPanel1.Controls.Add(post);
+            }
+            veza.Close();
+
+        }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //nisam kliknuo ovo

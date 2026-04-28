@@ -16,5 +16,12 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         {
             InitializeComponent();
         }
+
+        public void PromeniPodatke(string Naslov, string ImeObjavljaca, string glasovi)
+        {
+            labelNaslov.Text = Naslov;
+            imeLabel.Text = "Od: " + ImeObjavljaca;
+            labelGlasovi.Text = "Glasovi: " + glasovi;
+        }
     }
 }
