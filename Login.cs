@@ -14,10 +14,18 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
 {
     public partial class Login : Form
     {
+        bool registracija = false;
         public Login()
         {
             InitializeComponent();
         }
+        /*public Login(bool registracija)
+        {
+            label3.Text = "REGISTRACIJA";
+            this.registracija = true;
+            ButtonLogin.Text = "REGISTER";
+            InitializeComponent();
+        }*/
 
         private void ButtonLogin_Click(object sender, EventArgs e)
         {
@@ -55,7 +63,50 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                     }
                     else
                     {
-                        MessageBox.Show("Nepostojeći emajl");
+                        MessageBox.Show("Pogresan email, registruj se ako nemas nalog.");
+                    }
+                }
+                catch (Exception greska)
+                {
+                    MessageBox.Show(greska.Message);
+                }
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (TextboxEmail.Text == "" || TextboxLozinka.Text == "")
+            {
+                MessageBox.Show("Polja su prazna.");
+            }
+            else
+            {
+                try
+                {
+                    SqlConnection veza = Konekcija.NapraviVezu();
+                    SqlCommand cmd = new SqlCommand("Select * from korisnik where email=@username", veza);
+                    cmd.Parameters.AddWithValue("@username", TextboxEmail.Text);
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                    DataTable tabela = new DataTable();
+                    adapter.Fill(tabela);
+                    int brojac = tabela.Rows.Count;
+                    if (brojac == 0)
+                    {
+                        cmd = new SqlCommand("Insert into korisnik(ime, email, lozinka, dozvole) values(@email, @email, @lozinka, 0)", veza);
+                        cmd.Parameters.AddWithValue("@email", TextboxEmail.Text);
+                        cmd.Parameters.AddWithValue("@lozinka", TextboxLozinka.Text);
+
+                        veza.Open();
+                        int rezultat = cmd.ExecuteNonQuery();
+
+                        if (rezultat > 0)
+                        {
+                            MessageBox.Show("Uspesno ste se registrovali!");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Vec postoji nalog sa tim emailom.");
                     }
                 }
                 catch (Exception greska)

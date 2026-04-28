@@ -58,6 +58,12 @@
     <Compile Include="Objava.Designer.cs">
       <DependentUpon>Objava.cs</DependentUpon>
     </Compile>
+    <Compile Include="PostControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="PostControl.Designer.cs">
+      <DependentUpon>PostControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Sesija.cs" />
     <Compile Include="Glavna.cs">
       <SubType>Form</SubType>
@@ -82,6 +88,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Objava.resx">
       <DependentUpon>Objava.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="PostControl.resx">
+      <DependentUpon>PostControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
