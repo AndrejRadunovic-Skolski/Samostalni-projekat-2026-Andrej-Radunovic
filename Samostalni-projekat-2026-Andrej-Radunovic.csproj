@@ -52,6 +52,12 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="PregledObjave.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="PregledObjave.Designer.cs">
+      <DependentUpon>PregledObjave.cs</DependentUpon>
+    </Compile>
     <Compile Include="Objava.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +86,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="PregledObjave.resx">
+      <DependentUpon>PregledObjave.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Glavna.resx">
       <DependentUpon>Glavna.cs</DependentUpon>
     </EmbeddedResource>

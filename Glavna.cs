@@ -50,15 +50,22 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             {
                 PostControl post = new PostControl();
 
+                post.Tag = reader["objava_id"];
+
                 post.PromeniPodatke(
                     reader["naslov"].ToString(),
                     reader["Autor"].ToString(),
                     "NaN"
                 );
-
+                post.Click += Post_Click;
+                    
                 flowLayoutPanel1.Controls.Add(post);
             }
             veza.Close();
+
+        }
+        private void Post_Click(object sender, EventArgs e)
+        {
 
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
