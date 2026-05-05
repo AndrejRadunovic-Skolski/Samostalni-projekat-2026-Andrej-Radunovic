@@ -24,10 +24,11 @@ korisnik_id int foreign key references korisnik(korisnik_id),
 kategorija_id int foreign key references kategorija(kategorija_id),
 datum_objave datetime,
 glavna bit not null default 1,
-odgovor_id int foreign key references objava(objava_id),
+odgovor_id int,
+naslov nvarchar(50) default 'Bez naslova.',
 sadrzaj text
 )
-alter table Objava add ime nvarchar(200)
+
 
 create table Glas(
 glas_id int primary key identity(1,1),
@@ -38,7 +39,7 @@ objava_id int foreign key references objava(objava_id),
 go
 
 
-create function Provera_Korisnika
+create procedure Provera_Korisnika
 @email nvarchar(50),
 @lozinka nvarchar(100)
 as
@@ -209,7 +210,7 @@ return @@error
 end catch
 go
 
-create function Objava_Brojanje_Glasova
+create procedure Objava_Brojanje_Glasova
 @objava_id int
 as
 set lock_timeout 3000;
@@ -221,7 +222,7 @@ return @@error
 end catch
 go
 
-create function Objava_Brojanje_Odgovora
+create procedure Objava_Brojanje_Odgovora
 @objava_id int
 as
 set lock_timeout 3000;
@@ -233,7 +234,7 @@ return @@error
 end catch
 go
 
-create function Kategorija_Brojanje_Objava
+create procedure Kategorija_Brojanje_Objava
 @kategorija_id int
 as
 set lock_timeout 3000;
@@ -246,7 +247,7 @@ end catch
 go
 
 
-create function Vrati_Kategorije
+create procedure Vrati_Kategorije
 as
 begin
 select * from Kategorija
@@ -254,7 +255,7 @@ end
 go
 
 
-create function Vrati_Objave_Iz_Kategorije
+create procedure Vrati_Objave_Iz_Kategorije
 @kategorija_id int
 as
 begin
@@ -263,10 +264,16 @@ end
 go
 
 
-create function Vrati_Odgovore_Na_Objavu
+create procedure Vrati_Odgovore_Na_Objavu
 @objava_id int
 as
 begin
 select * from objava where odgovor_id = @objava_id
 end
 go
+
+insert into Korisnik(email, lozinka,ime,dozvole) values('test', 'test', 'test', 1)
+
+insert into Kategorija values('General','Test')
+insert into Kategorija values('Testifikacija','Test ali bolji')
+select * from glas
