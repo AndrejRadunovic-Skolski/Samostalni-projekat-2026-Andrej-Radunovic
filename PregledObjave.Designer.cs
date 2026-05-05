@@ -29,8 +29,6 @@
         private void InitializeComponent()
         {
             this.LabelOdgovor = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.ComboKategorija = new System.Windows.Forms.ComboBox();
             this.OdgovorLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -39,6 +37,11 @@
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
             this.Button_GlasDobar = new System.Windows.Forms.Button();
             this.Button_GlasLos = new System.Windows.Forms.Button();
+            this.labelDatum = new System.Windows.Forms.Label();
+            this.buttonOdgovor = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
+            this.labelGlasovi = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LabelOdgovor
@@ -50,25 +53,6 @@
             this.LabelOdgovor.Size = new System.Drawing.Size(94, 29);
             this.LabelOdgovor.TabIndex = 18;
             this.LabelOdgovor.Text = "IdPosta";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(6, 323);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(129, 29);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Kategorija:";
-            // 
-            // ComboKategorija
-            // 
-            this.ComboKategorija.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ComboKategorija.FormattingEnabled = true;
-            this.ComboKategorija.Location = new System.Drawing.Point(141, 323);
-            this.ComboKategorija.Name = "ComboKategorija";
-            this.ComboKategorija.Size = new System.Drawing.Size(216, 28);
-            this.ComboKategorija.TabIndex = 16;
             // 
             // OdgovorLabel
             // 
@@ -102,6 +86,8 @@
             // 
             // TextboxTekst
             // 
+            this.TextboxTekst.Enabled = false;
+            this.TextboxTekst.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextboxTekst.Location = new System.Drawing.Point(141, 68);
             this.TextboxTekst.Name = "TextboxTekst";
             this.TextboxTekst.Size = new System.Drawing.Size(418, 238);
@@ -110,6 +96,7 @@
             // 
             // TextboxNaslov
             // 
+            this.TextboxNaslov.Enabled = false;
             this.TextboxNaslov.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TextboxNaslov.Location = new System.Drawing.Point(141, 9);
             this.TextboxNaslov.Name = "TextboxNaslov";
@@ -128,33 +115,97 @@
             // 
             // Button_GlasDobar
             // 
-            this.Button_GlasDobar.Location = new System.Drawing.Point(385, 323);
+            this.Button_GlasDobar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_GlasDobar.Location = new System.Drawing.Point(328, 325);
             this.Button_GlasDobar.Name = "Button_GlasDobar";
             this.Button_GlasDobar.Size = new System.Drawing.Size(72, 72);
             this.Button_GlasDobar.TabIndex = 21;
             this.Button_GlasDobar.Text = "Živa istina!";
             this.Button_GlasDobar.UseVisualStyleBackColor = true;
+            this.Button_GlasDobar.Click += new System.EventHandler(this.Button_GlasDobar_Click);
             // 
             // Button_GlasLos
             // 
-            this.Button_GlasLos.Location = new System.Drawing.Point(487, 323);
+            this.Button_GlasLos.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Button_GlasLos.Location = new System.Drawing.Point(487, 325);
             this.Button_GlasLos.Name = "Button_GlasLos";
             this.Button_GlasLos.Size = new System.Drawing.Size(72, 72);
             this.Button_GlasLos.TabIndex = 22;
             this.Button_GlasLos.Text = "Hell naw!";
             this.Button_GlasLos.UseVisualStyleBackColor = true;
+            this.Button_GlasLos.Click += new System.EventHandler(this.Button_GlasLos_Click);
+            // 
+            // labelDatum
+            // 
+            this.labelDatum.AutoSize = true;
+            this.labelDatum.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDatum.Location = new System.Drawing.Point(12, 325);
+            this.labelDatum.Name = "labelDatum";
+            this.labelDatum.Size = new System.Drawing.Size(135, 29);
+            this.labelDatum.TabIndex = 23;
+            this.labelDatum.Text = "labelDatum";
+            // 
+            // buttonOdgovor
+            // 
+            this.buttonOdgovor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.buttonOdgovor.Location = new System.Drawing.Point(328, 403);
+            this.buttonOdgovor.Name = "buttonOdgovor";
+            this.buttonOdgovor.Size = new System.Drawing.Size(231, 35);
+            this.buttonOdgovor.TabIndex = 24;
+            this.buttonOdgovor.Text = "Odgovori";
+            this.buttonOdgovor.UseVisualStyleBackColor = true;
+            this.buttonOdgovor.Click += new System.EventHandler(this.buttonOdgovor_Click);
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(15, 399);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(220, 36);
+            this.button1.TabIndex = 25;
+            this.button1.Text = "<";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // labelGlasovi
+            // 
+            this.labelGlasovi.AutoSize = true;
+            this.labelGlasovi.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGlasovi.Location = new System.Drawing.Point(420, 361);
+            this.labelGlasovi.Name = "labelGlasovi";
+            this.labelGlasovi.Size = new System.Drawing.Size(51, 20);
+            this.labelGlasovi.TabIndex = 26;
+            this.labelGlasovi.Text = "label3";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(415, 338);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 20);
+            this.label4.TabIndex = 27;
+            this.label4.Text = "Glasovi:";
             // 
             // PregledObjave
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.AliceBlue;
             this.ClientSize = new System.Drawing.Size(1171, 446);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.labelGlasovi);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.buttonOdgovor);
+            this.Controls.Add(this.labelDatum);
             this.Controls.Add(this.Button_GlasLos);
             this.Controls.Add(this.Button_GlasDobar);
             this.Controls.Add(this.flowLayoutPanel1);
             this.Controls.Add(this.LabelOdgovor);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.ComboKategorija);
             this.Controls.Add(this.OdgovorLabel);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -171,8 +222,6 @@
         #endregion
 
         private System.Windows.Forms.Label LabelOdgovor;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ComboBox ComboKategorija;
         private System.Windows.Forms.Label OdgovorLabel;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
@@ -181,5 +230,10 @@
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
         private System.Windows.Forms.Button Button_GlasDobar;
         private System.Windows.Forms.Button Button_GlasLos;
+        private System.Windows.Forms.Label labelDatum;
+        private System.Windows.Forms.Button buttonOdgovor;
+        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label labelGlasovi;
+        private System.Windows.Forms.Label label4;
     }
 }

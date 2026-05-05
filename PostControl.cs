@@ -15,6 +15,10 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         public PostControl()
         {
             InitializeComponent();
+            foreach (Control c in this.Controls)
+            {
+                c.Click += (s, e) => this.OnClick(e);
+            }
         }
 
         public void PromeniPodatke(string Naslov, string ImeObjavljaca, string glasovi)
@@ -23,5 +27,6 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             imeLabel.Text = "Od: " + ImeObjavljaca;
             labelGlasovi.Text = "Glasovi: " + glasovi;
         }
+
     }
 }

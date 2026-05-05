@@ -67,6 +67,7 @@
             this.ComboKategorija.Name = "ComboKategorija";
             this.ComboKategorija.Size = new System.Drawing.Size(110, 21);
             this.ComboKategorija.TabIndex = 2;
+            this.ComboKategorija.SelectedIndexChanged += new System.EventHandler(this.ComboKategorija_SelectedIndexChanged);
             // 
             // button2
             // 

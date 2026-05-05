@@ -89,7 +89,21 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                 cmd.ExecuteNonQuery();
                 veza.Close();
             }
+            Glavna glavna = new Glavna();
+            glavna.Show();
             this.Hide();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Glavna glavna = new Glavna();
+            glavna.Show();
+            this.Hide();
+        }
+
+        private void ComboKategorija_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            glavnaKategorija = Convert.ToInt32(ComboKategorija.SelectedValue.ToString());
         }
     }
 }

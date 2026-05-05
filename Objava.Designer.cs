@@ -38,6 +38,7 @@
             this.ComboKategorija = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
             this.LabelOdgovor = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TextboxNaslov
@@ -116,6 +117,7 @@
             this.ComboKategorija.Name = "ComboKategorija";
             this.ComboKategorija.Size = new System.Drawing.Size(216, 28);
             this.ComboKategorija.TabIndex = 7;
+            this.ComboKategorija.SelectedIndexChanged += new System.EventHandler(this.ComboKategorija_SelectedIndexChanged);
             // 
             // label4
             // 
@@ -137,12 +139,28 @@
             this.LabelOdgovor.TabIndex = 9;
             this.LabelOdgovor.Text = "IdPosta";
             // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderColor = System.Drawing.Color.RoyalBlue;
+            this.button1.FlatAppearance.BorderSize = 0;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button1.Location = new System.Drawing.Point(1, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(81, 69);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "<";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Objava
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(575, 463);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.LabelOdgovor);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.ComboKategorija);
@@ -172,5 +190,6 @@
         private System.Windows.Forms.ComboBox ComboKategorija;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label LabelOdgovor;
+        private System.Windows.Forms.Button button1;
     }
 }

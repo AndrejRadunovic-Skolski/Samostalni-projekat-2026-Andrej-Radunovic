@@ -26,6 +26,7 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             adapter.Fill(tabela);
             ComboKategorija.DataSource = tabela;
 
+            flowLayoutPanel1.Controls.Clear();
             ucitajObjave(1);
         }
 
@@ -33,16 +34,19 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         {
             Objava objava = new Objava(0, 0);
             objava.Show();
+
+            this.Hide();
         }
 
         void ucitajObjave(int Kategorija)
         {
             SqlConnection veza = Konekcija.NapraviVezu();
-            string query = @"SELECT o.naslov, o.sadrzaj, k.ime AS Autor 
+            string query = @"SELECT o.naslov, o.objava_id, o.sadrzaj, k.ime AS Autor 
                      FROM Objava o 
                      INNER JOIN Korisnik k ON o.korisnik_id = k.korisnik_id 
-                     WHERE o.glavna = 1";
+                     WHERE o.glavna = 1 and o.kategorija_id = @kategorija";
             SqlCommand cmd = new SqlCommand(query, veza);
+            cmd.Parameters.AddWithValue("@kategorija", Kategorija);
             veza.Open();
             SqlDataReader reader = cmd.ExecuteReader();
 
@@ -66,11 +70,25 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         }
         private void Post_Click(object sender, EventArgs e)
         {
+            Control kliknutaKontrola = (Control)sender;
 
+            if (kliknutaKontrola.Tag != null)
+            {
+                PregledObjave pregledObjave = new PregledObjave(Convert.ToInt32(kliknutaKontrola.Tag));
+                pregledObjave.Show();
+                string id = kliknutaKontrola.Tag.ToString();
+                this.Hide();
+            }
         }
         private void panel1_Paint(object sender, PaintEventArgs e)
         {
             //nisam kliknuo ovo
+        }
+
+        private void ComboKategorija_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            flowLayoutPanel1.Controls.Clear();
+            ucitajObjave(Convert.ToInt32(ComboKategorija.SelectedValue.ToString()));
         }
     }
 }
