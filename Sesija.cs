@@ -10,5 +10,6 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
     {
         public static string idString;
         public static int id;
+        public static int dozvole;
     }
 }

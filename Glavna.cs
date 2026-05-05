@@ -28,6 +28,12 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
 
             flowLayoutPanel1.Controls.Clear();
             ucitajObjave(1);
+            ucitajIme();
+
+            if (Sesija.dozvole < 1)
+            {
+                buttonAdmin.Enabled = false;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,6 +44,33 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             this.Hide();
         }
 
+        private void ucitajIme()
+        {
+            SqlConnection veza = Konekcija.NapraviVezu();
+            string query = @"SELECT korisnik.ime from korisnik
+                             WHERE korisnik.korisnik_id = @korisnik_id";
+            SqlCommand cmd = new SqlCommand(query, veza);
+            cmd.Parameters.AddWithValue("@korisnik_id", Sesija.id);
+            DataTable podaci = new DataTable();
+            SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+            veza.Open();
+            adapter.Fill(podaci);
+            textboxUsername.Text = podaci.Rows[0]["ime"].ToString();
+            veza.Close();
+        }
+        private void promeniIme()
+        {
+            SqlConnection veza = Konekcija.NapraviVezu();
+            string query = @"update korisnik
+                             set korisnik.ime = @ime
+                             WHERE korisnik.korisnik_id = @korisnik_id";
+            SqlCommand cmd = new SqlCommand(query, veza);
+            cmd.Parameters.AddWithValue("@korisnik_id", Sesija.id);
+            cmd.Parameters.AddWithValue("@ime", textboxUsername.Text);
+            veza.Open();
+            cmd.ExecuteNonQuery();
+            veza.Close();
+        }
         void ucitajObjave(int Kategorija)
         {
             SqlConnection veza = Konekcija.NapraviVezu();
@@ -59,7 +92,7 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                 post.PromeniPodatke(
                     reader["naslov"].ToString(),
                     reader["Autor"].ToString(),
-                    "NaN"
+                    vratiGlasove(Convert.ToInt32(reader["objava_id"]))
                 );
                 post.Click += Post_Click;
                     
@@ -68,6 +101,28 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             veza.Close();
 
         }
+        string vratiGlasove(int objavaId)
+        {
+            int ukupno = 0;
+            SqlConnection veza = Konekcija.NapraviVezu();
+            string query = @"SELECT COUNT(*) from glas
+                     WHERE glas.objava_id = @objavaId and glas.vrednost = 1";
+            SqlCommand cmd = new SqlCommand(query, veza);
+            cmd.Parameters.AddWithValue("@objavaId", objavaId);
+            veza.Open();
+            ukupno = (int)cmd.ExecuteScalar();
+            veza.Close();
+
+            query = @"SELECT COUNT(*) from glas
+                     WHERE glas.objava_id = @objavaId and glas.vrednost = -1";
+            cmd = new SqlCommand(query, veza);
+            cmd.Parameters.AddWithValue("@objavaId", objavaId);
+            veza.Open();
+            ukupno = ukupno - (int)cmd.ExecuteScalar();
+            veza.Close();
+            return ukupno.ToString();
+        }
+
         private void Post_Click(object sender, EventArgs e)
         {
             Control kliknutaKontrola = (Control)sender;
@@ -89,6 +144,25 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
         {
             flowLayoutPanel1.Controls.Clear();
             ucitajObjave(Convert.ToInt32(ComboKategorija.SelectedValue.ToString()));
+        }
+
+        private void buttonPromeniIme_Click(object sender, EventArgs e)
+        {
+            promeniIme();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Login login = new Login();
+            login.Show();
+            this.Close();
+        }
+
+        private void buttonAdmin_Click(object sender, EventArgs e)
+        {
+            Admin admin = new Admin();
+            admin.Show();
+            this.Close();
         }
     }
 }

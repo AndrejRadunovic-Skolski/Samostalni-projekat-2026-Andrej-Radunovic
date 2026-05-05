@@ -38,7 +38,6 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
             {
                 Console.WriteLine("Objava nije pronađena.");
             }
-
             ucitajObjave();
             vratiGlasove();
         }
@@ -173,6 +172,7 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                     komanda.Parameters.AddWithValue("@korisnik_id", korisnikId);
                     komanda.Parameters.AddWithValue("@vrednost", 1);
 
+                    labelGlasovi.Text = (Convert.ToInt32(labelGlasovi.Text) + 1).ToString();
                     try
                     {
                         veza.Open();
@@ -202,6 +202,7 @@ namespace Samostalni_projekat_2026_Andrej_Radunovic
                     komanda.Parameters.AddWithValue("@korisnik_id", korisnikId);
                     komanda.Parameters.AddWithValue("@vrednost", -1);
 
+                    labelGlasovi.Text = (Convert.ToInt32(labelGlasovi.Text) - 1).ToString();
                     try
                     {
                         veza.Open();
